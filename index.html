@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book an Appointment</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<button id="darkToggle">🌙</button>
+
+<div class="container">
+  <h1>📅 Book an Appointment</h1>
+
+  <form id="bookingForm">
+    <input type="text" id="name" placeholder="Full name" required>
+    <input type="date" id="date" required>
+    <select id="time" required></select>
+    <button type="submit">Save</button>
+  </form>
+
+  <p id="message"></p>
+
+  <h2>📋 Bookings</h2>
+  <ul id="bookingList"></ul>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
