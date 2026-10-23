@@ -3,28 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book an Appointment</title>
+  <title>Appointment Booking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-<button id="darkToggle">🌙</button>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">📅</span>
+    <h1>Appointments</h1>
+  </div>
+  <button id="darkToggle" class="icon-btn" type="button" aria-label="Switch to dark mode">🌙</button>
+</header>
 
-<div class="container">
-  <h1>📅 Book an Appointment</h1>
+<main class="layout">
+  <section class="card" aria-labelledby="formTitle">
+    <h2 id="formTitle">New appointment</h2>
 
-  <form id="bookingForm">
-    <input type="text" id="name" placeholder="Full name" required>
-    <input type="date" id="date" required>
-    <select id="time" required></select>
-    <button type="submit">Save</button>
-  </form>
+    <form id="bookingForm" novalidate>
+      <div class="field">
+        <label for="name">Full name</label>
+        <input type="text" id="name" autocomplete="name" placeholder="Jane Smith" required>
+      </div>
 
-  <p id="message"></p>
+      <div class="row">
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" autocomplete="tel" placeholder="+961 70 000 000">
+        </div>
+        <div class="field">
+          <label for="service">Service</label>
+          <select id="service" required>
+            <option value="Consultation">Consultation</option>
+            <option value="Check-up">Check-up</option>
+            <option value="Follow-up">Follow-up</option>
+            <option value="Treatment">Treatment</option>
+          </select>
+        </div>
+      </div>
 
-  <h2>📋 Bookings</h2>
-  <ul id="bookingList"></ul>
-</div>
+      <div class="field">
+        <label for="date">Date</label>
+        <input type="date" id="date" required>
+      </div>
+
+      <fieldset class="field">
+        <legend>Time</legend>
+        <div id="slots" class="slots" role="radiogroup" aria-label="Available times">
+          <p class="hint">Pick a date to see available times.</p>
+        </div>
+      </fieldset>
+
+      <p id="formError" class="form-error" role="alert" hidden></p>
+
+      <div class="actions">
+        <button type="submit" id="submitBtn" class="btn primary">Book appointment</button>
+        <button type="button" id="cancelEdit" class="btn ghost" hidden>Cancel edit</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card" aria-labelledby="listTitle">
+    <div class="list-head">
+      <h2 id="listTitle">Bookings</h2>
+      <button id="exportBtn" class="btn ghost small" type="button">Export CSV</button>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Search by name, phone or service" aria-label="Search bookings">
+      <div class="tabs" role="tablist" aria-label="Filter bookings">
+        <button class="tab active" data-filter="upcoming" role="tab" aria-selected="true">Upcoming</button>
+        <button class="tab" data-filter="past" role="tab" aria-selected="false">Past</button>
+        <button class="tab" data-filter="all" role="tab" aria-selected="false">All</button>
+      </div>
+    </div>
+
+    <ul id="bookingList" class="booking-list"></ul>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
 <script src="script.js"></script>
 </body>
